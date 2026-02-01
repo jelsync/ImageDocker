@@ -1,6 +1,31 @@
-target/
-*.iml
-.idea/
+# Git
+*.md
+CHECKLIST.txt
+README.md
+# Documentation
+
+Thumbs.db
 .DS_Store
+# OS
+
 *.log
+# Logs
+
+*.ear
+*.war
+*.jar
+target/
+# Build artifacts
+
+*.iml
+.vscode
+.idea
+# IDE
+
+.github
+# CI/CD
+
+.gitattributes
+.gitignore
+.git
 
