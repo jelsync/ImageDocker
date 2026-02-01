@@ -1,0 +1,90 @@
+===================================================================
+        CHECKLIST DE DESPLIEGUE - HOLAMUNDO API
+===================================================================
+
+📋 ANTES DE CONSTRUIR LA IMAGEN DOCKER
+-------------------------------------------------------------------
+[ ] Docker Desktop está instalado
+[ ] Docker Desktop está EJECUTÁNDOSE (ícono en bandeja del sistema)
+[ ] Comando "docker ps" funciona sin errores
+[ ] Estás en el directorio del proyecto
+
+💡 SOLUCIÓN SI DOCKER NO FUNCIONA:
+   → Ejecuta: .\start-docker.ps1
+   → O abre Docker Desktop manualmente desde el menú de inicio
+
+===================================================================
+
+🔨 CONSTRUCCIÓN Y PRUEBA LOCAL
+-------------------------------------------------------------------
+[ ] Ejecutar: docker build -t holamundo-api .
+[ ] Ejecutar: docker run -d -p 8080:8080 --name holamundo holamundo-api
+[ ] Probar: Invoke-RestMethod http://localhost:8080/api/hola
+[ ] Verificar que la respuesta incluye: mensaje, ip, hostname
+
+💡 ATAJO: Ejecuta .\run-local.ps1 para hacer todo automáticamente
+
+===================================================================
+
+☁️ DESPLIEGUE A AWS ECR
+-------------------------------------------------------------------
+[ ] Tener AWS CLI instalado: aws --version
+[ ] Tener credenciales de AWS configuradas
+[ ] Conocer tu AWS Account ID
+[ ] Decidir la región (ej: us-east-1)
+
+COMANDOS:
+---------
+[ ] Ejecutar: .\deploy-to-ecr.ps1 -AccountId TU_ACCOUNT_ID -Region us-east-1
+
+O MANUALMENTE:
+---------
+[ ] aws ecr get-login-password --region us-east-1 | docker login ...
+[ ] aws ecr create-repository --repository-name holamundo-api
+[ ] docker build -t holamundo-api .
+[ ] docker tag holamundo-api:latest ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/holamundo-api:latest
+[ ] docker push ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/holamundo-api:latest
+
+===================================================================
+
+🚀 DESPLIEGUE EN AWS (ECS/Fargate)
+-------------------------------------------------------------------
+[ ] Crear un cluster de ECS
+[ ] Crear una task definition usando la imagen de ECR
+[ ] Configurar puerto 8080
+[ ] Crear un servicio o ejecutar una tarea
+[ ] Configurar security group (permitir puerto 8080)
+[ ] Obtener la IP pública del contenedor
+[ ] Probar: curl http://IP_PUBLICA:8080/api/hola
+
+===================================================================
+
+✅ VERIFICACIÓN FINAL
+-------------------------------------------------------------------
+[ ] La aplicación responde en /api/hola
+[ ] La respuesta incluye la IP del servidor
+[ ] El contenedor está corriendo sin errores
+[ ] Los logs no muestran errores: docker logs holamundo
+
+===================================================================
+
+📝 COMANDOS ÚTILES
+-------------------------------------------------------------------
+Ver logs:        docker logs -f holamundo
+Detener:         docker stop holamundo
+Eliminar:        docker rm -f holamundo
+Ver imágenes:    docker images
+Ver ECR images:  aws ecr describe-images --repository-name holamundo-api
+
+===================================================================
+
+🆘 EN CASO DE PROBLEMAS
+-------------------------------------------------------------------
+1. Revisa: TROUBLESHOOTING.md
+2. Revisa: QUICK-START.md
+3. Verifica logs: docker logs holamundo
+4. Verifica estado: docker ps -a
+5. Reinicia Docker Desktop si es necesario
+
+===================================================================
+

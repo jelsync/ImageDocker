@@ -1,0 +1,37 @@
+# .gitignore para HolaMundo Java Spring Boot
+
+# Compilados
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Secrets y configuración local
+*.env
+.env.local
+application-local.properties
+
+# Docker
+*.pid
+docker-compose.override.yml
+
