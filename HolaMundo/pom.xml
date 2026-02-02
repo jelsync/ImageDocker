@@ -41,10 +41,10 @@
                 <version>3.4.0</version>
                 <configuration>
                     <from>
-                        <image>eclipse-temurin:17-jre</image>
+                        <image>public.ecr.aws/amazoncorretto/amazoncorretto:17</image>
                     </from>
                     <to>
-                        <image>ghcr.io/${env.GITHUB_REPOSITORY}</image>
+                        <image>ghcr.io/jelsync/imagedocker</image>
                         <tags>
                             <tag>latest</tag>
                             <tag>${project.version}</tag>

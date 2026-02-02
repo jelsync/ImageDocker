@@ -35,7 +35,7 @@ jobs:
       - name: Build and push image with Jib
         working-directory: ./HolaMundo
         run: |
-          mvn clean compile jib:build \
+          mvn clean package jib:build \
             -Djib.to.auth.username=${{ github.actor }} \
             -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }} \
             -Djib.to.image=ghcr.io/${{ github.repository }}:latest
