@@ -21,8 +21,8 @@ WORKDIR /app
 # Crear usuario no-root para seguridad
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-# Copiar el JAR desde la etapa de build
-COPY --from=build /app/target/*.jar app.jar
+# Copiar el WAR desde la etapa de build
+COPY --from=build /app/target/*.war app.war
 
 # Cambiar permisos
 RUN chown -R appuser:appgroup /app
@@ -37,5 +37,5 @@ EXPOSE 8080
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=50.0"
 
 # Comando de inicio
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.war"]
 
